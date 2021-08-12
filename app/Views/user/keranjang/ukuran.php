@@ -70,17 +70,19 @@
                         <li>
                             <h5>PESAN</h5>
                         </li>
-                        <form action="<?= site_url('user/produk/keluar') ?>" method="post">
-                            <input type="hidden" name="kodeproduk" value="<?= $produk['kodeproduk'] ?>">
+                        <form action="<?= site_url('user/keranjang/ukuran?idkeranjang=' . $keranjang['idkeranjang']) ?>"
+                            method="post">
                             <?php if ($sat == 'cm²') : ?>
                             <li>
                                 <h6>Ukuran Barang(centimeter/cm)</h6>
                                 <div class="row">
-                                    <input type="number" name="p" id="p" class="form-control" style="width: 100px">
+                                    <input type="number" name="p" id="p" class="form-control"
+                                        value="<?= $keranjang['p'] ?>" style="width: 100px">
                                     &nbsp;x&nbsp;
-                                    <input type="number" name="l" id="l" class="form-control" style="width: 100px">
+                                    <input type="number" name="l" id="l" class="form-control"
+                                        value="<?= $keranjang['l'] ?>" style="width: 100px">
                                     &nbsp;=&nbsp;
-                                    <input type="number" name="jumlah" id="jumlah" value="<?= $produk['minimal'] ?>"
+                                    <input type="number" name="jumlah" id="jumlah" value="<?= $keranjang['jumlah'] ?>"
                                         min="<?= $produk['minimal'] ?>" class="form-control" style="width: 100px"
                                         readonly>
                                     &nbsp;
@@ -92,11 +94,13 @@
                             <li>
                                 <h6>Ukuran Barang(meter/m)</h6>
                                 <div class="row">
-                                    <input type="number" name="p" id="p" class="form-control" style="width: 100px">
+                                    <input type="number" name="p" id="p" class="form-control"
+                                        value="<?= $keranjang['p'] ?>" style="width: 100px">
                                     &nbsp;x&nbsp;
-                                    <input type="number" name="l" id="l" class="form-control" style="width: 100px">
+                                    <input type="number" name="l" id="l" class="form-control"
+                                        value="<?= $keranjang['l'] ?>" style="width: 100px">
                                     &nbsp;=&nbsp;
-                                    <input type="number" name="jumlah" id="jumlah" value="<?= $produk['minimal'] ?>"
+                                    <input type="number" name="jumlah" id="jumlah" value="<?= $keranjang['jumlah'] ?>"
                                         min="<?= $produk['minimal'] ?>" class="form-control" style="width: 100px"
                                         readonly>
                                     &nbsp;

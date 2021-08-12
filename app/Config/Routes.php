@@ -7,8 +7,7 @@ $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
-if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
-{
+if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
 	require SYSTEMPATH . 'Config/Routes.php';
 }
 
@@ -36,7 +35,7 @@ $routes->get('/', 'Home::index');
 $routes->get('produk', 'Home::produk');
 $routes->get('cara', 'Home::cara');
 $routes->match(['post', 'get'], 'admin/login', 'Admin/Admin::login');
-$routes->group('admin', ['filter' => 'AuthAdmin'], function($routes){
+$routes->group('admin', ['filter' => 'AuthAdmin'], function ($routes) {
 	$routes->add('/', 'Admin\Home::index');
 	$routes->add('produk', 'Admin\Produk::index');
 	$routes->add('produk/desain', 'Admin\Produk::desain');
@@ -45,6 +44,9 @@ $routes->group('admin', ['filter' => 'AuthAdmin'], function($routes){
 	$routes->add('produk/tambah', 'Admin\Produk::tambah');
 	$routes->add('produk/ubah', 'Admin\Produk::ubah');
 	$routes->add('produk/hapus', 'Admin\Produk::hapus');
+	$routes->add('satuan', 'Admin\Satuan::index');
+	$routes->add('satuan/tambah', 'Admin\Satuan::tambah');
+	$routes->add('satuan/hapus', 'Admin\Satuan::hapus');
 	$routes->add('daerah', 'Admin\Daerah::index');
 	$routes->add('daerah/tambah', 'Admin\Daerah::tambah');
 	$routes->add('daerah/ubah', 'Admin\Daerah::ubah');
@@ -62,12 +64,13 @@ $routes->group('admin', ['filter' => 'AuthAdmin'], function($routes){
 });
 $routes->match(['post', 'get'], 'user/daftar', 'User/User::daftar');
 $routes->match(['post', 'get'], 'user/login', 'User/User::login');
-$routes->group('user', ['filter' => 'AuthUser'], function($routes){
+$routes->group('user', ['filter' => 'AuthUser'], function ($routes) {
 	$routes->add('/', 'User\Home::index');
 	$routes->add('produk', 'User\Produk::index');
 	$routes->add('produk/detail', 'User\Produk::detail');
 	$routes->add('produk/keluar', 'User\Produk::keluar');
 	$routes->add('keranjang', 'User\Keranjang::index');
+	$routes->add('keranjang/ukuran', 'User\Keranjang::ukuran');
 	$routes->add('keranjang/update', 'User\Keranjang::update');
 	$routes->add('keranjang/checkout', 'User\Keranjang::checkout');
 	$routes->add('pesanan', 'User\Pesanan::index');
@@ -92,7 +95,6 @@ $routes->group('user', ['filter' => 'AuthUser'], function($routes){
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
-if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
-{
+if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

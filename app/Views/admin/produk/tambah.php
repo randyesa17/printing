@@ -28,12 +28,21 @@
                                     placeholder="Nama Produk" required>
                             </div>
                             <div class="form-group">
-                                <label for="harga">Harga Satuan</label>
+                                <label for="satuan">Satuan Produk</label>
+                                <select name="satuan" id="satuan" class="form-control">
+                                    <option value="0">-- Pilih Satuan Produk --</option>
+                                    <?php foreach ($satuan as $key => $value) : ?>
+                                    <option value="<?= $value['idsatuan'] ?>"><?= $value['satuan'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="harga">Harga per Satuan</label>
                                 <input type="number" name="harga" class="form-control" id="harga" placeholder="Harga"
                                     min="1" required>
                             </div>
                             <div class="form-group">
-                                <label for="berat">Berat Produk(Kg)</label>
+                                <label for="berat">Berat Produk(Kg) per Satuan</label>
                                 <input type="number" name="berat" class="form-control" id="berat"
                                     placeholder="Berat (Kg)" step="0.01" required>
                             </div>
@@ -53,7 +62,7 @@
                                     accept="image/*" required>
                             </div><br>
                             <div class="form-group">
-                                <label for="minimal">Minimal Pesan</label>
+                                <label for="minimal">Minimal Pesan per Satuan</label>
                                 <input type="number" name="minimal" class="form-control" id="minimal"
                                     placeholder="Minimal Pesan" min="1" required>
                             </div>

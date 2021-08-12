@@ -107,6 +107,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="<?= site_url('admin/satuan') ?>">
+                            <i class="ti-layout"></i> Satuan Produk
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?= site_url('admin/daerah') ?>">
                             <i class="ti-map"></i> Daerah
                         </a>

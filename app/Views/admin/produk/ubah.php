@@ -28,12 +28,23 @@
                                     value="<?= $produk['namaproduk'] ?>" required>
                             </div>
                             <div class="form-group">
-                                <label for="harga">Harga Satuan</label>
+                                <label for="satuan">Satuan Produk</label>
+                                <select name="satuan" id="satuan" class="form-control">
+                                    <option value="0">-- Pilih Satuan Produk --</option>
+                                    <?php foreach ($satuan as $key => $value) : ?>
+                                    <option value="<?= $value['idsatuan'] ?>"
+                                        <?php if ($value['idsatuan'] == $produk['idsatuan']) echo "selected" ?>>
+                                        <?= $value['satuan'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="harga">Harga Satuan per Satuan</label>
                                 <input type="number" name="harga" class="form-control" id="harga"
                                     value="<?= $produk['harga'] ?>" required>
                             </div>
                             <div class="form-group">
-                                <label for="berat">Berat Produk(Kg)</label>
+                                <label for="berat">Berat Produk(Kg) per Satuan</label>
                                 <input type="number" name="berat" class="form-control" id="berat"
                                     value="<?= $produk['berat'] ?>" step="0.01" required>
                             </div>
@@ -47,7 +58,7 @@
                                 <input type="file" name="gambar" class="form-control-file" id="gambar" accept="image/*">
                             </div><br>
                             <div class="form-group">
-                                <label for="minimal">Minimal Pesan</label>
+                                <label for="minimal">Minimal Pesan per Satuan</label>
                                 <input type="number" name="minimal" class="form-control" id="minimal"
                                     value="<?= $produk['minimal'] ?>" min="1" required>
                             </div>

@@ -26,11 +26,11 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="col">
-                                        <?php if(!empty(session()->getFlashdata('info'))) : ?>
+                                        <?php if (!empty(session()->getFlashdata('info'))) : ?>
                                         <div class="alert alert-danger" role="alert">
-                                            <?php 
-                                                echo session()->getFlashdata('info'); 
-                                            ?>
+                                            <?php
+                                                echo session()->getFlashdata('info');
+                                                ?>
                                         </div>
                                         <?php endif; ?>
                                     </div>
@@ -51,7 +51,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <?php if($action != 'admin/login') : ?>
+                                <?php if ($action != 'admin/login') : ?>
                                 <div class="card-footer text-center">
                                     <div class="small"><a href="<?= site_url('user/daftar') ?>">Belum punya akun,
                                             Silahkan
@@ -68,7 +68,8 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">&copy; Copyright <strong><span>AMIK STUDIO</span></strong>. 2021</div>
+                        <div class="text-muted">&copy; Copyright <strong><span>AMIK Digital Printing</span></strong>.
+                            2021</div>
                     </div>
                 </div>
             </footer>

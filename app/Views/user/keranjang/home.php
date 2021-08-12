@@ -69,57 +69,81 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $no=1; foreach ($keranjang as $key => $value) : ?>
+                                    <?php $no = 1;
+                                    foreach ($keranjang as $key => $value) : ?>
                                     <form action="<?= site_url('user/keranjang/update') ?>" method="get">
                                         <input type="hidden" name="idkeranjang" value="<?= $value['idkeranjang'] ?>">
+                                        <?php
+                                            $sat;
+                                            foreach ($produk as $keyP => $valueP) {
+                                                if ($value['kodeproduk'] == $valueP['kodeproduk']) {
+                                                    foreach ($satuan as $keyS => $valueS) {
+                                                        if ($valueP['idsatuan'] == $valueS['idsatuan']) {
+                                                            $sat = $valueS['satuan'];
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            ?>
                                         <tr>
                                             <td class="image" data-title="No">
                                                 <?php foreach ($produk as $keyP => $valueP) : ?>
-                                                <?php if($value['kodeproduk'] == $valueP['kodeproduk']) : ?>
-                                                <img src="<?= site_url('assets/images/produk/'.$valueP['gambar']) ?>"
+                                                <?php if ($value['kodeproduk'] == $valueP['kodeproduk']) : ?>
+                                                <img src="<?= site_url('assets/images/produk/' . $valueP['gambar']) ?>"
                                                     alt="#">
                                                 <?php endif; ?>
                                                 <?php endforeach; ?>
                                             </td>
                                             <td class="product-des" data-title="Description">
                                                 <?php
-                                            foreach ($produk as $keyP => $valueP) {
-                                                if($value['kodeproduk'] == $valueP['kodeproduk']){
-                                                    echo "<p class='product-name'><a>".$valueP['namaproduk']."</a></p>";
-                                                }
-                                            }
-                                            ?>
+                                                    foreach ($produk as $keyP => $valueP) {
+                                                        if ($value['kodeproduk'] == $valueP['kodeproduk']) {
+                                                            echo "<p class='product-name'><a>" . $valueP['namaproduk'] . "</a></p>";
+                                                        }
+                                                    }
+                                                    ?>
                                             </td>
                                             <td class="price" data-title="Price">
                                                 <?php
-                                            foreach ($produk as $keyP => $valueP) {
-                                                if($value['kodeproduk'] == $valueP['kodeproduk']){
-                                                    echo "<span>Rp. ".number_format($valueP['harga'])."</span>";
-                                                    echo "<input type='hidden' id='harga".$no."'
-                                                    value='".$valueP['harga']."'>";
-                                                }
-                                            }
-                                            ?>
+                                                    foreach ($produk as $keyP => $valueP) {
+                                                        if ($value['kodeproduk'] == $valueP['kodeproduk']) {
+                                                            echo "<span>Rp. " . number_format($valueP['harga']) . "/" . $sat . "</span>";
+                                                            echo "<input type='hidden' id='harga" . $no . "'
+                                                    value='" . $valueP['harga'] . "'>";
+                                                        }
+                                                    }
+                                                    ?>
                                             </td>
+                                            <?php if (empty($value['p']) && empty($value['l'])) : ?>
                                             <td class="qty text-center" data-title="Qty">
-                                                <input type="number" size="4" value="<?= $value['jumlah'] ?>" min="<?php
-                                            foreach ($produk as $keyP => $valueP) {
-                                                if($value['kodeproduk'] == $valueP['kodeproduk']){
-                                                    echo $valueP['minimal'];
-                                                }
-                                            }
-                                            ?>" step="1" class="c-input-text qty text" name="jumlah"
-                                                    id="jumlah<?= $no ?>" onchange="total<?= $no ?>()">
+                                                <input type="number" size="4" value="<?= $value['jumlah'] ?>"
+                                                    min="<?php
+                                                                                                                            foreach ($produk as $keyP => $valueP) {
+                                                                                                                                if ($value['kodeproduk'] == $valueP['kodeproduk']) {
+                                                                                                                                    echo $valueP['minimal'];
+                                                                                                                                }
+                                                                                                                            } ?>" step="1" class="c-input-text qty text"
+                                                    name="jumlah" id="jumlah<?= $no ?>" onchange="total<?= $no ?>()">
                                             </td>
+                                            <?php else : ?>
+                                            <td class="qty text-center" data-title="Qty">
+                                                <span>Ukuran <?= $value['p'] ?> x <?= $value['l'] ?> =
+                                                    <?= $value['jumlah'] . $sat ?></span>
+                                                <br>
+                                                <a
+                                                    href="<?= site_url('user/keranjang/ukuran?idkeranjang=' . $value['idkeranjang']) ?>">Ubah
+                                                    Ukuran</a>
+                                            </td>
+                                            <?php endif; ?>
                                             <td class="total-amount" data-title="Total">
                                                 <span id="total<?= $no ?>">
                                                     <?php
-                                                foreach ($produk as $keyP => $valueP) {
-                                                    if($value['kodeproduk'] == $valueP['kodeproduk']){
-                                                        echo "Rp. ".number_format($valueP['harga']*$value['jumlah']).",00";
-                                                    }
-                                                }
-                                                ?>
+                                                        foreach ($produk as $keyP => $valueP) {
+                                                            if ($value['kodeproduk'] == $valueP['kodeproduk']) {
+                                                                echo "Rp. " . number_format($valueP['harga'] * $value['jumlah']) . ",00";
+                                                            }
+                                                        }
+                                                        ?>
                                                 </span>
                                             </td>
                                             <td>
@@ -127,7 +151,8 @@
                                             </td>
                                         </tr>
                                     </form>
-                                    <?php $no++; endforeach; ?>
+                                    <?php $no++;
+                                    endforeach; ?>
                                 </tbody>
                             </table>
                             <!--/ End Shopping Summery -->
@@ -141,7 +166,7 @@
 </main>
 <!-- End #main -->
 <script>
-<?php for($i=1; $i<=$no; $i++) : ?>
+<?php for ($i = 1; $i <= $no; $i++) : ?>
 
 function total<?= $i ?>() {
     var h = document.getElementById("harga<?= $i ?>").value;
