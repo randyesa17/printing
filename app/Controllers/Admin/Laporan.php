@@ -10,7 +10,7 @@ use App\Models\DaerahModel;
 
 class Laporan extends BaseController
 {
-    public function index()
+    public function penjualan()
 	{
 		$model = new TransaksiModel();
 		$modelUser = new UserModel();
@@ -48,7 +48,7 @@ class Laporan extends BaseController
         // print_r($produk);
         // echo "</pre>";
 		$data = [
-			'judul' => 'Laporan Produk',
+			'judul' => 'Laporan Penjualan Produk',
 			'pesanan' => $pesanan,
 			'transaksi' => $transaksi,
 			'user' => $user,
@@ -57,7 +57,53 @@ class Laporan extends BaseController
             'no' => 1,
 		];
 
-		return view('admin/laporan', $data);
+		return view('admin/laporan/penjualan', $data);
+	}
+
+    public function pemesanan()
+	{
+		$model = new TransaksiModel();
+		$modelUser = new UserModel();
+		$modelProduk = new ProdukModel();
+
+		$db = \Config\Database::connect();
+		$sql = "SELECT * FROM transaksi WHERE status != 'Belum Dibayar' AND status != 'Menunggu Verifikasi'";
+		$result = $db->query($sql);
+		$transaksi = $result->getResult('array');
+		$user = $modelUser->findAll();
+		$produk = $modelProduk->findAll();
+        foreach ($produk as $key => $value) {
+            $kodeproduk = $value['kodeproduk'];
+            $jumlahProduk = 0;
+            $total = 0;
+            $terjual = 0;   
+            $sql = "SELECT * FROM transaksi WHERE kodeproduk='$kodeproduk' AND status != 'Belum Dibayar' AND status != 'Menunggu Verifikasi'";
+            $result = $db->query($sql);
+            $pesanan = $result->getResult('array');
+            foreach ($pesanan as $keyP => $valueP) {
+                $total = $total + $valueP['totalbiaya'];
+                $terjual = $terjual + $valueP['jumlah'];
+                $jumlahProduk++;
+            }
+            $produk[$key]['jumlah'] = $jumlahProduk;
+            $produk[$key]['total'] = $total;
+            $produk[$key]['terjual'] = $terjual;
+        }
+        $total = 0;
+        foreach ($transaksi as $key => $value) {
+            $total = $total + $value['totalbiaya'];
+        }
+		$data = [
+			'judul' => 'Laporan Transaksi Pemesanan',
+			'pesanan' => $pesanan,
+			'transaksi' => $transaksi,
+			'user' => $user,
+            'total' => $total,
+			'produk' => $produk,
+            'no' => 1,
+		];
+
+		return view('admin/laporan/pemesanan', $data);
 	}
 
     public function cari()
@@ -69,12 +115,12 @@ class Laporan extends BaseController
         $sampai = $this->request->getPost('sampai');
 
         $db = \Config\Database::connect();
-		$sql = "SELECT * FROM transaksi WHERE tgl BETWEEN '$awal' AND '$sampai' AND status != 'Belum Dibayar' AND status != 'Menunggu Verifikasi'";
-		$result = $db->query($sql);
-		$transaksi = $result->getResult('array');
+        $sql = "SELECT * FROM transaksi WHERE tgl BETWEEN '$awal' AND '$sampai' AND status != 'Belum Dibayar' AND status != 'Menunggu Verifikasi'";
+        $result = $db->query($sql);
+        $transaksi = $result->getResult('array');
         // $hitung = $result->getNumRows();
-		$user = $modelUser->findAll();
-		$produk = $modelProduk->findAll();
+        $user = $modelUser->findAll();
+        $produk = $modelProduk->findAll();
         foreach ($produk as $key => $value) {
             $kodeproduk = $value['kodeproduk'];
             $jumlahProduk = 0;
@@ -99,16 +145,20 @@ class Laporan extends BaseController
         // echo "<pre>";
         // print_r($produk);
         // echo "</pre>";
-		$data = [
-			'judul' => 'Laporan Produk dari Tanggal '.date("d-m-Y",strtotime($awal)).' Sampai Tanggal '.date("d-m-Y",strtotime($sampai)),
-			'pesanan' => $pesanan,
-			'transaksi' => $transaksi,
-			'user' => $user,
-			'produk' => $produk,
-			'total' => $total,
+        $data = [
+            'judul' => 'Laporan dari Tanggal '.date("d-m-Y",strtotime($awal)).' Sampai Tanggal '.date("d-m-Y",strtotime($sampai)),
+            'pesanan' => $pesanan,
+            'transaksi' => $transaksi,
+            'user' => $user,
+            'produk' => $produk,
+            'total' => $total,
             'no' => 1,
-		];
-
-		return view('admin/laporan', $data);
+        ];
+        if ($this->request->getGet('laporan') == 'penjualan') {
+            return view('admin/laporan/penjualan', $data);
+        } else {
+            return view('admin/laporan/pemesanan', $data);
+        }
+        
 	}
 }

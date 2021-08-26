@@ -113,8 +113,16 @@
                             </li>
                             <?php endif; ?>
                             <li>
+                                <?php if ($sat == 'cm²') : ?>
                                 <button type="submit" id="masuk" class="btn btn-primary btn-md my-0 p" disabled>Masukkan
                                     Keranjang</button>
+                                <?php elseif ($sat == 'm²') : ?>
+                                <button type="submit" id="masuk" class="btn btn-primary btn-md my-0 p" disabled>Masukkan
+                                    Keranjang</button>
+                                <?php else : ?>
+                                <button type="submit" id="masuk" class="btn btn-primary btn-md my-0 p">Masukkan
+                                    Keranjang</button>
+                                <?php endif; ?>
                             </li>
                         </form>
                     </ul>

@@ -13,7 +13,7 @@ class Pesanan extends BaseController
 {
     public function masuk()
     {
-        if($this->request->getMethod() == 'post'){
+        if ($this->request->getMethod() == 'post') {
             $model = new TransaksiModel();
             $modelKeranjang = new KeranjangModel();
             $modelProduk = new ProdukModel();
@@ -26,12 +26,14 @@ class Pesanan extends BaseController
                     'telp' => $this->request->getPost('telp'),
                 ];
 
-            $modelUser->update($this->request->getPost('iduser'), $dataUser);
+                $modelUser->update($this->request->getPost('iduser'), $dataUser);
             }
 
+            $retur = 1;
             $file = $this->request->getFile('desain');
             if (!empty($file)) {
                 $name = $file->getRandomName();
+                $retur = 0;
             } else {
                 $produk = $modelProduk->find($this->request->getPost('kodeproduk'));
                 if ($this->request->getPost('desain') == "desain1") {
@@ -42,27 +44,94 @@ class Pesanan extends BaseController
                     $name = $produk['desain3'];
                 }
             }
-            
+
             $data = [
                 'idtransaksi' => $this->request->getPost('idtransaksi'),
                 'iduser' => $this->request->getPost('iduser'),
                 'kodeproduk' => $this->request->getPost('kodeproduk'),
+                'p' => $this->request->getPost('p'),
+                'l' => $this->request->getPost('l'),
                 'jumlah' => $this->request->getPost('jumlah'),
                 'totalharga' => $this->request->getPost('totalharga'),
                 'desain' => $name,
+                'ket' => $this->request->getPost('ket'),
                 'kodepos' => $this->request->getPost('kodepos'),
                 'ongkir' => $this->request->getPost('ongkir'),
                 'totalbiaya' => $this->request->getPost('total'),
+                'retur' => $retur,
                 'status' => 'Belum Bayar',
             ];
 
             $model->insert($data);
             if (!empty($file))
-            $file->move('./assets/images/desain', $name);
+                $file->move('./assets/images/desain', $name);
             $modelKeranjang->delete($this->request->getPost('idkeranjang'));
-			return redirect()->to(site_url('user/pesanan/bayar?idtransaksi='.$this->request->getPost('idtransaksi')));
+            return redirect()->to(site_url('user/pesanan/bayar?idtransaksi=' . $this->request->getPost('idtransaksi')));
             // print_r($data);
         }
+    }
+
+    public function masuks()
+    {
+
+        // if ($this->request->getMethod() == 'post') {
+        //     $model = new TransaksiModel();
+        //     $modelKeranjang = new KeranjangModel();
+        //     $modelProduk = new ProdukModel();
+        //     $modelUser = new UserModel();
+        //     $modelDaerah = new DaerahModel();
+
+        //     if ($this->request->getPost('telp') != '' && $this->request->getPost('alamat') != '') {
+        //         $dataUser = [
+        //             'alamat' => $this->request->getPost('alamat'),
+        //             'telp' => $this->request->getPost('telp'),
+        //         ];
+
+        //         $modelUser->update($this->request->getPost('iduser'), $dataUser);
+        //     }
+
+        //     $retur = 1;
+        //     $file = $this->request->getFile('desain');
+        //     if (!empty($file)) {
+        //         $name = $file->getRandomName();
+        //         $retur = 0;
+        //     } else {
+        //         $produk = $modelProduk->find($this->request->getPost('kodeproduk'));
+        //         if ($this->request->getPost('desain') == "desain1") {
+        //             $name = $produk['desain1'];
+        //         } elseif ($this->request->getPost('desain') == "desain2") {
+        //             $name = $produk['desain2'];
+        //         } elseif ($this->request->getPost('desain') == "desain3") {
+        //             $name = $produk['desain3'];
+        //         }
+        //     }
+
+        //     $data = [
+        //         'idtransaksi' => $this->request->getPost('idtransaksi'),
+        //         'iduser' => $this->request->getPost('iduser'),
+        //         'kodeproduk' => $this->request->getPost('kodeproduk'),
+        //         'p' => $this->request->getPost('p'),
+        //         'l' => $this->request->getPost('l'),
+        //         'jumlah' => $this->request->getPost('jumlah'),
+        //         'totalharga' => $this->request->getPost('totalharga'),
+        //         'desain' => $name,
+        //         'ket' => $this->request->getPost('ket'),
+        //         'kodepos' => $this->request->getPost('kodepos'),
+        //         'ongkir' => $this->request->getPost('ongkir'),
+        //         'totalbiaya' => $this->request->getPost('total'),
+        //         'retur' => $retur,
+        //         'status' => 'Belum Bayar',
+        //     ];
+
+        //     $model->insert($data);
+        //     if (!empty($file))
+        //         $file->move('./assets/images/desain', $name);
+        //     $modelKeranjang->delete($this->request->getPost('idkeranjang'));
+        //     return redirect()->to(site_url('user/pesanan/bayar?idtransaksi=' . $this->request->getPost('idtransaksi')));
+        echo "<pre>";
+        print_r($_POST);
+        echo "</pre>";
+        // }
     }
 
     public function index()
@@ -83,12 +152,12 @@ class Pesanan extends BaseController
             'user' => $user,
             'daerah' => $daerah,
         ];
-		return view('user/pesanan/home', $data);
+        return view('user/pesanan/home', $data);
     }
 
     public function bayar()
     {
-        if($this->request->getMethod() == 'post'){
+        if ($this->request->getMethod() == 'post') {
             $model = new TransaksiModel();
 
             $file = $this->request->getFile('bukti');
@@ -101,7 +170,7 @@ class Pesanan extends BaseController
 
             $model->update($this->request->getGet('idtransaksi'), $data);
             $file->move('./assets/images/bukti', $name);
-			return redirect()->to(site_url('user/pesanan'));
+            return redirect()->to(site_url('user/pesanan'));
             // print_r($_POST);
         } else {
             $model = new TransaksiModel();

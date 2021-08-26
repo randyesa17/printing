@@ -61,12 +61,26 @@ class Produk extends BaseController
 				// print_r($data);
 				$modelKeranjang->insert($data);
 			} else {
-				$jumlah = $keranjang['jumlah'] + $this->request->getPost('jumlah');
-				$data = [
-					'jumlah' => $jumlah,
-				];
-
-				$modelKeranjang->update($keranjang['idkeranjang'], $data);
+				if (!empty($this->request->getPost('p')) && !empty($this->request->getPost('l'))) {
+					$p = $this->request->getPost('p');
+					$l = $this->request->getPost('l');
+					$jumlah = $this->request->getPost('jumlah');
+					$data = [
+						'idkeranjang' => 'keranjang' . uniqid(),
+						'iduser' => session()->get('iduser'),
+						'kodeproduk' => $this->request->getPost('kodeproduk'),
+						'p' => $p,
+						'l' => $l,
+						'jumlah' => $jumlah,
+					];
+					$modelKeranjang->insert($data);
+				} else {
+					$jumlah = $keranjang['jumlah'] + $this->request->getPost('jumlah');
+					$data = [
+						'jumlah' => $jumlah,
+					];
+					$modelKeranjang->update($keranjang['idkeranjang'], $data);
+				}
 			}
 
 			if (!$modelKeranjang->errors()) {

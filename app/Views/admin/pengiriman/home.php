@@ -43,43 +43,48 @@
                                         <th>Berat</th>
                                         <th>Tujuan Pengiriman</th>
                                         <th>Ongkos Kirim</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($pesanan as $key => $value) : ?>
+                                    <?php foreach ($pesanan as $key => $value) : ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td><?= $value['idtransaksi'] ?></td>
                                         <td>
                                             <?php foreach ($user as $keyU => $valueU) {
-                                            if ($value['iduser'] == $valueU['iduser']) {
-                                                echo $valueU['namauser'];
-                                            }
-                                        } ?>
+                                                    if ($value['iduser'] == $valueU['iduser']) {
+                                                        echo $valueU['namauser'];
+                                                    }
+                                                } ?>
                                         </td>
                                         <td>
                                             <?php foreach ($produk as $keyP => $valueP) {
-                                            if ($value['kodeproduk'] == $valueP['kodeproduk']) {
-                                                echo $valueP['namaproduk'];
-                                            }
-                                        } ?>
+                                                    if ($value['kodeproduk'] == $valueP['kodeproduk']) {
+                                                        echo $valueP['namaproduk'];
+                                                    }
+                                                } ?>
                                         </td>
                                         <td><?= $value['jumlah'] ?></td>
                                         <td>
                                             <?php foreach ($produk as $keyP => $valueP) {
-                                            if ($value['kodeproduk'] == $valueP['kodeproduk']) {
-                                                echo $valueP['berat'] * $value['jumlah']." Kg";
-                                            }
-                                        } ?>
+                                                    if ($value['kodeproduk'] == $valueP['kodeproduk']) {
+                                                        echo $valueP['berat'] * $value['jumlah'] . " Kg";
+                                                    }
+                                                } ?>
                                         </td>
                                         <td>
                                             <?php foreach ($user as $keyU => $valueU) {
-                                            if ($value['iduser'] == $valueU['iduser']) {
-                                                echo $valueU['alamat'];
-                                            }
-                                        } ?>
+                                                    if ($value['iduser'] == $valueU['iduser']) {
+                                                        echo $valueU['alamat'];
+                                                    }
+                                                } ?>
                                         </td>
                                         <td>Rp. <?= number_format($value['ongkir']) ?></td>
+                                        <td>
+                                            <a href="<?= site_url('admin/pengiriman/pesan?idtransaksi=' . $value['idtransaksi']) ?>"
+                                                class="btn-md"><i class="fa fa-whatsapp"></i></a>
+                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>

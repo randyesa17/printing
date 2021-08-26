@@ -60,6 +60,7 @@
                             <table class="table shopping-summery">
                                 <thead>
                                     <tr class="main-hading">
+                                        <th></th>
                                         <th>Gambar</th>
                                         <th>Nama Produk</th>
                                         <th class="text-center">Harga Satuan</th>
@@ -69,10 +70,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $no = 1;
-                                    foreach ($keranjang as $key => $value) : ?>
-                                    <form action="<?= site_url('user/keranjang/update') ?>" method="get">
-                                        <input type="hidden" name="idkeranjang" value="<?= $value['idkeranjang'] ?>">
+                                    <form action="<?= site_url('user/keranjang/update') ?>" method="get" id="checkouts">
+                                        <?php $no = 1;
+                                        foreach ($keranjang as $key => $value) : ?>
+
+                                        <input type="hidden" name="idkeranjang<?= $no ?>"
+                                            value="<?= $value['idkeranjang'] ?>">
                                         <?php
                                             $sat;
                                             foreach ($produk as $keyP => $valueP) {
@@ -86,6 +89,8 @@
                                             }
                                             ?>
                                         <tr>
+                                            <td><input type="checkbox" name="checkidkeranjang<?= $no ?>"
+                                                    id="checkidkeranjang<?= $no ?>"></td>
                                             <td class="image" data-title="No">
                                                 <?php foreach ($produk as $keyP => $valueP) : ?>
                                                 <?php if ($value['kodeproduk'] == $valueP['kodeproduk']) : ?>
@@ -123,10 +128,15 @@
                                                                                                                                     echo $valueP['minimal'];
                                                                                                                                 }
                                                                                                                             } ?>" step="1" class="c-input-text qty text"
-                                                    name="jumlah" id="jumlah<?= $no ?>" onchange="total<?= $no ?>()">
+                                                    name="jumlah<?= $no ?>" id="jumlah<?= $no ?>"
+                                                    onchange="total<?= $no ?>()">
                                             </td>
                                             <?php else : ?>
                                             <td class="qty text-center" data-title="Qty">
+                                                <input type="hidden" name="jumlah<?= $no ?>"
+                                                    value="<?= $value['jumlah'] ?>">
+                                                <input type="hidden" name="p<?= $no ?>" value="<?= $value['p'] ?>">
+                                                <input type="hidden" name="l<?= $no ?>" value="<?= $value['l'] ?>">
                                                 <span>Ukuran <?= $value['p'] ?> x <?= $value['l'] ?> =
                                                     <?= $value['jumlah'] . $sat ?></span>
                                                 <br>
@@ -147,14 +157,20 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <button type="submit" class="btn btn-sm btn-primary">Checkout</button>
+                                                <a href="<?= site_url('user/keranjang/hapus?idkeranjang=' . $value['idkeranjang']) ?>"
+                                                    class="btn btn-sm btn-primary">Hapus</a>
+                                                <!-- <button type="submit" class="btn btn-sm btn-primary">Checkout</button> -->
                                             </td>
                                         </tr>
+                                        <?php $banyak = $no;
+                                            $no++;
+                                        endforeach; ?>
+                                        <input type="hidden" name="banyak" value="<?= $banyak ?>">
                                     </form>
-                                    <?php $no++;
-                                    endforeach; ?>
                                 </tbody>
                             </table>
+                            <a href="#" class="btn btn-sm btn-primary"
+                                onclick="document.getElementById('checkouts').submit();">Checkouts</a>
                             <!--/ End Shopping Summery -->
                         </div>
                     </div>

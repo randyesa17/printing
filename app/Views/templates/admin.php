@@ -129,11 +129,21 @@
                     </li>
                     <li class="label">Laporan</li>
                     <li>
-                        <a href="<?= site_url('admin/laporan') ?>">
-                            <i class="ti-files"></i> Laporan
+                        <a href="<?= site_url('admin/laporan/penjualan') ?>">
+                            <i class="ti-files"></i> Laporan Penjualan
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= site_url('admin/laporan/pemesanan') ?>">
+                            <i class="ti-files"></i> Laporan Pemesanan
                         </a>
                     </li>
                     <li class="label">Admin</li>
+                    <li>
+                        <a href="<?= site_url('admin/karyawan') ?>">
+                            <i class="ti-user"></i> Karyawan
+                        </a>
+                    </li>
                     <li>
                         <a href="<?= site_url('admin/atur') ?>">
                             <i class="ti-user"></i> Admin

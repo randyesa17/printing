@@ -50,7 +50,7 @@
         <!-- Shopping Cart -->
         <div class="row">
             <div class="col-12">
-                <form action="<?= site_url('admin/laporan/cari')?>" method="post">
+                <form action="<?= site_url('admin/laporan/penjualan/cari?laporan=penjualan')?>" method="post">
                     <div class="form-group col-6 float-left">
                         <label for="awal">Awal</label>
                         <input class="form-control" type="date" name="awal" id="awal" required>

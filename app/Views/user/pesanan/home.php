@@ -76,7 +76,7 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <?php if($value['status'] == 'Belum Dibayar') : ?>
+                                        <?php if($value['status'] == 'Belum Bayar') : ?>
                                         <a class="dropdown-item"
                                             href="<?= site_url('user/pesanan/bayar?idtransaksi='.$value['idtransaksi']) ?>">Bayar</a>
                                         <?php elseif($value['status'] == 'Dikirim') : ?>
