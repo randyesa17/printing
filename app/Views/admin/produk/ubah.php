@@ -50,7 +50,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
-                                <textarea name="keterangan" id="keterangan" cols="10" rows="5"
+                                <textarea name="keterangan" id="keterangan" class="form-control"
                                     placeholder="Keterangan Produk" required><?= $produk['keterangan'] ?></textarea>
                             </div>
                             <div class="md-form">

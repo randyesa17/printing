@@ -97,12 +97,12 @@ class User extends BaseController
 
 		$data = [
 			'email' => $this->request->getPost('email'),
-			'nama' => $this->request->getPost('nama'),
+			'namauser' => $this->request->getPost('nama'),
 			'telp' => $this->request->getPost('telp'),
 			'alamat' => $this->request->getPost('alamat'),
 		];
 
-		$model->update(session()->get('kodeuser'), $data);
+		$model->update(session()->get('iduser'), $data);
 		if(!$model->errors()){
 			return redirect()->to(site_url('user/profil'));
 		} else {

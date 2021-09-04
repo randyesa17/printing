@@ -78,7 +78,7 @@
     <link href="<?= site_url('assets/publik/css/slicknav.min.css') ?>" rel="stylesheet">
 
     <!-- Eshop StyleSheet -->
-    <link href="<?= site_url('assets/publik/css/reset.css') ?>" rel="stylesheet">
+    <!-- <link href="<?= site_url('assets/publik/css/reset.css') ?>" rel="stylesheet"> -->
     <link href="<?= site_url('assets/publik/css/styless.css') ?>" rel="stylesheet">
     <link href="<?= site_url('assets/publik/css/responsive.css') ?>" rel="stylesheet">
 </head>

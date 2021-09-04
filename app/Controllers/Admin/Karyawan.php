@@ -57,7 +57,7 @@ class Karyawan extends BaseController
             $kodeBarang = $huruf . sprintf("%03s", $urutan);
             $data = [
                 'judul' => 'Tambah Data Karyawan',
-                'kode' => $kodeKaryawan,
+                'kode' => $kodeBarang,
             ];
             return view('admin/karyawan/tambah', $data);
         }
