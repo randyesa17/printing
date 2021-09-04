@@ -71,7 +71,7 @@ class Pengiriman extends BaseController
 
 
 		$curl = curl_init();
-		$token = "M15qOaRAfRtj0sS2K99zr14uByhRlBU3BG37Xps0lTvvyIGGmRZTbOtFogVXVzaa";
+		$token = "4lvKziwp4kXO7m4ZKEDA8qDF8kdE5Dj8M9h8WrinehW8QiDJ0THRFryXoWYcpaRs";
 		$data = [
 			'phone' => $user['telp'],
 			'caption' => 'Barang Sudah Dikirim. Silahkan Scan Barcode Ini Untuk Mengetahui Detail Pesanan Anda. Terima Kasih Telah Membeli di Toko Kami', // can be null
@@ -90,7 +90,7 @@ class Pengiriman extends BaseController
 		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
-		curl_setopt($curl, CURLOPT_URL, "https://tx.wablas.com/api/send-image");
+		curl_setopt($curl, CURLOPT_URL, "https://cepogo.wablas.com/api/send-image");
 		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 		$result = curl_exec($curl);

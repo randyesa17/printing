@@ -58,7 +58,8 @@
                             <h6>Harga : Rp. <?= number_format($produk['harga']) ?> / <?= $sat ?></h6>
                         </li>
                         <li>
-                            <h6>Berat Produk : <?= $produk['berat'] ?> Kg/ <?= $sat ?></h6>
+                            <h6>Berat Produk : <?= $produk['berat'] ?> g(<?= $produk['berat'] / 1000 ?>Kg)/ <?= $sat ?>
+                            </h6>
                         </li>
                         <li>
                             <h6>Minimal Pembelian : <?= $produk['minimal'] ?> <?= $sat ?></h6>
@@ -70,8 +71,48 @@
                         <li>
                             <h5>PESAN</h5>
                         </li>
-                        <form action="<?= site_url('user/produk/keluar') ?>" method="post">
+                        <hr>
+                        <form action="<?= site_url('user/produk/keluar') ?>" method="post"
+                            enctype="multipart/form-data">
                             <input type="hidden" name="kodeproduk" value="<?= $produk['kodeproduk'] ?>">
+                            <div class="md-form mb-3">
+                                <h4>Desain</h4>
+                                <div>
+                                    <select name="desain" id="desain" class="form-control">
+                                        <option value="1">Pilih Desain</option>
+                                        <option value="desain1">Desain 1</option>
+                                        <option value="desain2">Desain 2</option>
+                                        <option value="desain3">Desain 3</option>
+                                        <option value="custom">Upload Sendiri</option>
+                                    </select>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col">
+                                        <img src="<?= site_url('assets/images/desain/' . $produk['desain1']) ?>"
+                                            style="display: none;" id="desain1" width="300" alt="">
+                                        <img src="<?= site_url('assets/images/desain/' . $produk['desain2']) ?>"
+                                            style="display: none;" id="desain2" width="300" alt="">
+                                        <img src="<?= site_url('assets/images/desain/' . $produk['desain3']) ?>"
+                                            style="display: none;" id="desain3" width="300" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md-form">
+                                <label for="desain" class="">Upload Desain : </label>
+                                <input type="file" name="desain" id="custom" class="form-control-file" accept="image/*"
+                                    disabled>
+                            </div>
+                            <hr>
+                            <div class="md-form">
+                                <label for="keterangan" class="">Keterangan Pesan : </label>
+                                <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
+                            </div>
+                            <div class="md-form">
+                                <label for="tambahan" class="">Tambahan Gambar : </label>
+                                <input type="file" name="tambahan" id="tambahan" class="form-control-file"
+                                    accept="image/*">
+                            </div>
+                            <hr>
                             <?php if ($sat == 'cm²') : ?>
                             <li>
                                 <h6>Ukuran Barang(centimeter/cm)</h6>
@@ -136,6 +177,9 @@
 </main>
 <!-- End #main -->
 <script>
+document.getElementById("desain").onchange = function() {
+    desain()
+};
 document.getElementById("hitung").onclick = function() {
     hitung()
 };
@@ -162,6 +206,39 @@ function masuk() {
         alert('Ukuran tidak sesuai dengan minimal beli');
     } else {
         this.form.submit();
+    }
+}
+
+function desain() {
+    var pilihan = document.getElementById("desain").value;
+    var desain1 = document.getElementById("desain1");
+    var desain2 = document.getElementById("desain2");
+    var desain3 = document.getElementById("desain3");
+    var upload = document.getElementById("custom");
+    if (pilihan === "desain1") {
+        desain1.style.display = "block";
+        desain2.style.display = "none";
+        desain3.style.display = "none";
+        upload.disabled = true;
+        upload.required = false;
+    } else if (pilihan === "desain2") {
+        desain1.style.display = "none";
+        desain2.style.display = "block";
+        desain3.style.display = "none";
+        upload.disabled = true;
+        upload.required = false;
+    } else if (pilihan === "desain3") {
+        desain1.style.display = "none";
+        desain2.style.display = "none";
+        desain3.style.display = "block";
+        upload.disabled = true;
+        upload.required = false;
+    } else if (pilihan === "custom") {
+        desain1.style.display = "none";
+        desain2.style.display = "none";
+        desain3.style.display = "none";
+        upload.disabled = false;
+        upload.required = true;
     }
 }
 </script>

@@ -26,39 +26,28 @@
 
             <div class="col-lg-8 mt-5 mt-lg-0">
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Nama Pemesan : <?= $user['namauser'] ?></label>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Email : <?= $user['email'] ?></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Nomor Telpon/HP : <?= $user['telp'] ?></label>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Alamat : <?= $user['alamat'] ?></label>
+                    </div>
+                </div>
+
                 <form action="<?= site_url('user/pesanan/masuk') ?>" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="idtransaksi" value="<?= $kode ?>">
                     <input type="hidden" name="iduser" value="<?= $user['iduser'] ?>">
                     <input type="hidden" name="kodeproduk" value="<?= $produk['kodeproduk'] ?>">
                     <input type="hidden" name="idkeranjang" value="<?= $keranjang['idkeranjang'] ?>">
-                    <div class="md-form mb-3">
-                        <label for="nama">Nama Depan</label>
-                        <input type="text" class="form-control" placeholder="<?= $user['namauser'] ?>" readonly>
-                    </div>
-                    <div class="md-form mb-3">
-                        <label for="telp">Nomor Telpon/HP</label>
-                        <?php if ($user['telp'] == '') : ?>
-                        <input type="text" name="telp" id="telp" class="form-control" required autofocus>
-                        <?php else : ?>
-                        <input type="text" class="form-control" value="<?= $user['telp'] ?>" readonly>
-                        <?php endif; ?>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control" value="<?= $user['email'] ?>" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="alamat">Alamat</label>
-                        <?php if ($user['alamat'] == '') : ?>
-                        <textarea class="form-control" name="alamat" id="alamat" rows="3" required></textarea>
-                        <small>
-                            Masukkan Alamat yang Valid
-                        </small>
-                        <?php else : ?>
-                        <textarea class="form-control" rows="3" readonly><?= $user['alamat'] ?></textarea>
-                        <?php endif; ?>
-                    </div>
-
                     <hr>
                     <div class="md-form mb-3">
                         <h4>Nama Barang</h4>
@@ -93,39 +82,31 @@
                         <h4>Berat Barang(Kg)</h4>
                         <div class="">
                             <input type="text" id="berat" class="form-control"
-                                value="<?= ceil($produk['berat'] * $keranjang['jumlah']) ?>" readonly>
+                                value="<?= ceil(($produk['berat'] * $keranjang['jumlah'])/1000) ?>" readonly>
                         </div>
                     </div>
                     <div class="md-form mb-3">
-                        <h4>Desain</h4>
-                        <div>
-                            <select name="desain" id="desain" class="form-control">
-                                <option value="1">Pilih Desain</option>
-                                <option value="desain1">Desain 1</option>
-                                <option value="desain2">Desain 2</option>
-                                <option value="desain3">Desain 3</option>
-                                <option value="custom">Upload Sendiri</option>
-                            </select>
+                        <h4>Keterangan Pesan</h4>
+                        <div class="">
+                            <textarea class="form-control" readonly><?= $keranjang['keterangan'] ?></textarea>
                         </div>
-                        <div class="row mt-1">
-                            <div class="col">
-                                <img src="<?= site_url('assets/images/desain/' . $produk['desain1']) ?>"
-                                    style="display: none;" id="desain1" width="300" alt="">
-                                <img src="<?= site_url('assets/images/desain/' . $produk['desain2']) ?>"
-                                    style="display: none;" id="desain2" width="300" alt="">
-                                <img src="<?= site_url('assets/images/desain/' . $produk['desain3']) ?>"
-                                    style="display: none;" id="desain3" width="300" alt="">
+                    </div>
+                    <div class="md-form mt-4 row">
+                        <div class="col-md-6">
+                            <label class=""><strong>Desain yang diinginkan</strong></label><br /><br />
+                            <div class="col-md-5 col-lg-6 order-md-0 text-center text-md-start">
+                                <img class="img-fluid"
+                                    src="<?= site_url('assets/images/desain/'.$keranjang['desain']) ?>" width="550"
+                                    alt="" /><br /><br />
                             </div>
                         </div>
-                    </div>
-                    <div class="md-form">
-                        <label for="desain" class="">Upload Desain : </label>
-                        <input type="file" name="desain" id="custom" class="form-control-file" disabled>
-                    </div>
-                    <div class="md-form">
-                        <h4>Keterangan</h4>
-                        <div>
-                            <textarea name="ket" id="ket" class="form-control"></textarea>
+                        <div class="col-md-6">
+                            <label class=""><strong>Tambahan Gambar</strong></label><br /><br />
+                            <div class="col-md-5 col-lg-6 order-md-0 text-center text-md-start">
+                                <img class="img-fluid"
+                                    src="<?= site_url('assets/images/tambahan/'.$keranjang['tambahan']) ?>" width="550"
+                                    alt="" /><br /><br />
+                            </div>
                         </div>
                     </div>
                     <hr>

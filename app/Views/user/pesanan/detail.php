@@ -46,11 +46,15 @@
                     </div>
                     <div class="col-md-6">
                         <?php $sat = '';
-                            foreach ($satuan as $keyS => $valueS) {
-                                if ($produk['idsatuan'] == $valueS['idsatuan']) {
-                                    $sat = $valueS['satuan'];
+                        foreach ($produk as $keyP => $valueP) {
+                            if ($produk['kodeproduk'] == $valueP['kodeproduk']) {
+                                foreach ($satuan as $keyS => $valueS) {
+                                    if ($valueP['idsatuan'] == $valueS['idsatuan']) {
+                                        $sat = $valueS['satuan'];
+                                    }
                                 }
                             }
+                        }
                         ?>
                         <label>Jumlah : <?= $pesanan['jumlah']." ".$sat ?></label>
                     </div>
@@ -88,28 +92,6 @@
                             alt="" /><br /><br />
                     </div>
                 </div><br />
-
-                <hr>
-                <div class="md-form mb-3">
-                    <div class="md-form mb-3">
-                        <h4><strong>Transfer ke :</strong></h4>
-                        <label for="alamat" class="">Kode Bank: <strong>451</strong></label><br />
-                        <label for="alamat" class="">No. Rekening: <strong>7112893201</strong></label><br />
-                        <label for="alamat" class="">a.n <strong>Hendrawan</strong> (Bank Syariah Mandiri)</label>
-                    </div>
-                    <hr>
-                </div>
-                <form action="<?= site_url('user/pesanan/bayar?idtransaksi='.$pesanan['idtransaksi']) ?>" method="post"
-                    enctype="multipart/form-data">
-                    <div class="md-form mb-3">
-                        <h4>Bukti Upload Pembayaran</h4>
-                        <input type="file" name="bukti" class="form-control-file" required>
-                    </div>
-                    <hr>
-
-                    <button type="submit" class="btn btn-danger btn-lg btn-block">Konfirmasi</button>
-                </form>
-
             </div>
         </div>
 </main>

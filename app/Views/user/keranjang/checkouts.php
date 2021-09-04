@@ -26,40 +26,29 @@
 
             <div class="col-lg-8 mt-5 mt-lg-0">
 
-                <form action="<?= site_url('user/pesanan/masuks') ?>" method="post" enctype="multipart/form-data">
-                    <?php $no = 1; ?>
+                <?php $no = 1; ?>
 
-                    <div class="md-form mb-3">
-                        <label for="nama">Nama Depan</label>
-                        <input type="text" class="form-control" placeholder="<?= $user['namauser'] ?>" readonly>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Nama Pemesan : <?= $user['namauser'] ?></label>
                     </div>
-                    <div class="md-form mb-3">
-                        <label for="telp">Nomor Telpon/HP</label>
-                        <?php if ($user['telp'] == '') : ?>
-                        <input type="text" name="telp" id="telp" class="form-control" required autofocus>
-                        <?php else : ?>
-                        <input type="text" class="form-control" value="<?= $user['telp'] ?>" readonly>
-                        <?php endif; ?>
+                    <div class="col-md-6">
+                        <label>Email : <?= $user['email'] ?></label>
                     </div>
-                    <div class="mb-3">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control" value="<?= $user['email'] ?>" readonly>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Nomor Telpon/HP : <?= $user['telp'] ?></label>
                     </div>
-                    <div class="mb-3">
-                        <label for="alamat">Alamat</label>
-                        <?php if ($user['alamat'] == '') : ?>
-                        <textarea class="form-control" name="alamat" id="alamat" rows="3" required></textarea>
-                        <small>
-                            Masukkan Alamat yang Valid
-                        </small>
-                        <?php else : ?>
-                        <textarea class="form-control" rows="3" readonly><?= $user['alamat'] ?></textarea>
-                        <?php endif; ?>
+                    <div class="col-md-6">
+                        <label>Alamat : <?= $user['alamat'] ?></label>
                     </div>
-                    <input type="hidden" name="iduser" value="<?= $user['iduser'] ?>">
-                    <hr>
+                </div>
+                <hr>
+                <form action="<?= site_url('user/pesanan/masuks') ?>" method="post" enctype="multipart/form-data">
                     <?php foreach ($keranjang as $key => $value) : ?>
                     <input type="hidden" name="idtransaksi<?= $no ?>" value="<?= $kode[$no] ?>">
+                    <input type="hidden" name="iduser" value="<?= $user['iduser'] ?>">
                     <input type="hidden" name="kodeproduk<?= $no ?>" value="<?= $produk[$no - 1]['kodeproduk'] ?>">
                     <input type="hidden" name="idkeranjang<?= $no ?>" value="<?= $keranjang[$no - 1]['idkeranjang'] ?>">
                     <div class="md-form mb-3">
@@ -114,40 +103,25 @@
                         <h4>Berat Barang(Kg)</h4>
                         <div class="">
                             <input type="text" id="berat<?= $no ?>" class="form-control"
-                                value="<?= ceil($produk[$no - 1]['berat'] * $value['jumlah']) ?>" readonly>
+                                value="<?= ceil(($produk[$no - 1]['berat'] * $value['jumlah'])/1000) ?>" readonly>
                         </div>
                     </div>
-                    <div class="md-form mb-3">
-                        <h4>Desain</h4>
-                        <div>
-                            <select name="desain<?= $no ?>" id="desain<?= $no ?>" class="form-control">
-                                <option value="1">Pilih Desain</option>
-                                <option value="desain1">Desain 1</option>
-                                <option value="desain2">Desain 2</option>
-                                <option value="desain3">Desain 3</option>
-                                <option value="custom">Upload Sendiri</option>
-                            </select>
-                        </div>
-                        <div class="row mt-1">
-                            <div class="col">
-                                <img src="<?= site_url('assets/images/desain/' . $produk[$no - 1]['desain1']) ?>"
-                                    style="display: none;" id="desain1<?= $no ?>" width="300" alt="">
-                                <img src="<?= site_url('assets/images/desain/' . $produk[$no - 1]['desain2']) ?>"
-                                    style="display: none;" id="desain2<?= $no ?>" width="300" alt="">
-                                <img src="<?= site_url('assets/images/desain/' . $produk[$no - 1]['desain3']) ?>"
-                                    style="display: none;" id="desain3<?= $no ?>" width="300" alt="">
+                    <div class="md-form mt-4 row">
+                        <div class="col-md-6">
+                            <label class=""><strong>Desain yang diinginkan</strong></label><br /><br />
+                            <div class="col-md-5 col-lg-6 order-md-0 text-center text-md-start">
+                                <img class="img-fluid"
+                                    src="<?= site_url('assets/images/desain/'.$keranjang[$no - 1]['desain']) ?>"
+                                    width="550" alt="" /><br /><br />
                             </div>
                         </div>
-                    </div>
-                    <div class="md-form">
-                        <label for="desain" class="">Upload Desain : </label>
-                        <input type="file" name="desain<?= $no ?>" id="custom<?= $no ?>" class="form-control-file"
-                            disabled>
-                    </div>
-                    <div class="md-form">
-                        <h4>Keterangan</h4>
-                        <div>
-                            <textarea name="ket<?= $no ?>" id="ket<?= $no ?>" class="form-control"></textarea>
+                        <div class="col-md-6">
+                            <label class=""><strong>Tambahan Gambar</strong></label><br /><br />
+                            <div class="col-md-5 col-lg-6 order-md-0 text-center text-md-start">
+                                <img class="img-fluid"
+                                    src="<?= site_url('assets/images/tambahan/'.$keranjang[$no - 1]['tambahan']) ?>"
+                                    width="550" alt="" /><br /><br />
+                            </div>
                         </div>
                     </div>
                     <hr>
@@ -193,6 +167,7 @@
                             <label for="alamat" class="">No. Rekening: <strong>7112893201</strong></label><br />
                             <label for="alamat" class="">a.n <strong>Hendrawan</strong> (Bank Syariah Mandiri)</label>
                         </div>
+                        <input type="hidden" name="banyak" value="<?= $banyak ?>">
                         <button type="submit" class="btn btn-danger btn-lg btn-block">Checkout</button>
                 </form>
 
@@ -231,7 +206,9 @@ function ongkir() {
         style: 'currency',
         currency: 'IDR'
     }).format(document.getElementById("ongkir").value);
-    var b = <?= $produk[$no - 2]['harga'] * $value['jumlah'] ?>;
+    var b = <?php for ($i=0; $i < $banyak; $i++) { 
+        echo "parseInt(".$produk[$i]['harga'] * $keranjang[$i]['jumlah'].") + ";
+    } ?>parseInt(0);
     var o = document.getElementById("ongkir").value;
     var t = parseInt(b) + parseInt(o);
     document.getElementById("total").value = t;

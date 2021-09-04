@@ -124,7 +124,12 @@
                                                 download>Download Desain</a>
                                         </td>
                                         <td><?= $value['jumlah'] ?></td>
-                                        <td>Rp. <?= number_format($value['totalbiaya']) ?></td>
+                                        <td><?php foreach ($produk as $keyP => $valueP) {
+                                            if ($value['kodeproduk'] == $valueP['kodeproduk']) {
+                                                echo "Rp. ".number_format($valueP['total']);
+                                            }
+                                        } ?>
+                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                     <tr>

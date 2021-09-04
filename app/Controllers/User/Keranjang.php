@@ -8,6 +8,7 @@ use App\Models\ProdukModel;
 use App\Models\SatuanModel;
 use App\Models\UserModel;
 use App\Models\DaerahModel;
+use App\Models\TransaksiModel;
 
 class Keranjang extends BaseController
 {
@@ -92,7 +93,7 @@ class Keranjang extends BaseController
             }
             // print_r($data);
         }
-        $checkoutID = $checkoutID . "banyak=" . $banyakrecord;
+        $checkoutID = $checkoutID . "banyak=" . $banyakrecord ."&banyaknya=".$banyak;
         // print_r($checkoutID);
 
         // $data = [
@@ -115,11 +116,19 @@ class Keranjang extends BaseController
         $modelProduk = new ProdukModel();
         $modelUser = new UserModel();
         $modelDaerah = new DaerahModel();
+        $modelTransaksi = new TransaksiModel();
 
         $view = "";
         $banyak = $this->request->getGet('banyak');
-        if ($banyak == 1) {
-            $keranjang = $model->where('idkeranjang', $this->request->getGet('idkeranjang1'))->first();
+        $banyaknya = $this->request->getGet('banyaknya');
+        if ($banyak == 0) {
+            return redirect()->to(site_url('user/keranjang'));
+        } elseif ($banyak == 1) {
+            for ($i=0; $i <= $banyaknya; $i++) { 
+                if (!empty($this->request->getGet('idkeranjang'.$i))) {
+                    $keranjang = $model->where('idkeranjang', $this->request->getGet('idkeranjang'.$i))->first();
+                }
+            }
             $produk = $modelProduk->where('kodeproduk', $keranjang['kodeproduk'])->first();
             $user = $modelUser->where('iduser', $keranjang['iduser'])->first();
             $daerah = $modelDaerah->findAll();
@@ -144,6 +153,13 @@ class Keranjang extends BaseController
             $user = $modelUser->where('iduser', session()->get('iduser'))->first();
             $daerah = $modelDaerah->findAll();
             $view = "user/keranjang/checkouts";
+            $transaksi = $modelTransaksi->orderBy('idgroup', 'desc')->first();
+            $idgroup = 0;
+            if (!empty($transaksi)) {
+                if ($transaksi['idgroup'] != 0) {
+                    $idgroup = $transaksi['idgroup'] + 1;
+                }
+            }
             $data = [
                 'keranjang' => $keranjang,
                 'produk' => $produk,
@@ -152,11 +168,12 @@ class Keranjang extends BaseController
                 'totalproduk' => $totalproduk,
                 'total' => $total,
                 'kode' => $kode,
+                'idgroup' => $idgroup,
             ];
             // print_r($total);
         }
 
-
+            // print_r($keranjang);
         return view($view, $data);
     }
 }

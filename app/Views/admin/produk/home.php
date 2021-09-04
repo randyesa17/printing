@@ -64,7 +64,8 @@
                                     </td>
                                     <td class="price" data-title="Price">Rp.
                                         <?= number_format($value['harga']) ?>/<?= $sat ?></td>
-                                    <td class="price"><?= $value['berat'] ?> Kg/<?= $sat ?></td>
+                                    <td class="price"><?= $value['berat'] ?> g(<?= $value['berat'] / 1000 ?>
+                                        Kg)/<?= $sat ?></td>
                                     <td class="text-center">
                                         <div class="hidden-sm hidden-xs btn-group">
                                             <a href="<?= site_url('admin/produk/desain?kodeproduk=' . $value['kodeproduk']) ?>"

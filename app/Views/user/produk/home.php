@@ -31,13 +31,21 @@
                 <?php foreach ($produk as $key => $value) : ?>
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <div class="portfolio-wrap">
+                        <?php
+                        $sat;
+                        foreach ($satuan as $keyS => $valueS) {
+                            if ($value['idsatuan'] == $valueS['idsatuan']) {
+                                $sat = $valueS['satuan'];
+                            }
+                        }
+                        ?>
                         <img src="<?= site_url('assets/images/produk/'.$value['gambar']) ?>" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4><?= $value['namaproduk'] ?></h4>
                             <p>Rp <?= number_format($value['harga']) ?>,-</p>
-                            <p><?= $value['berat'] ?> Kg/Pcs</p>
+                            <p><?= $value['berat'] ?> g(<?= $value['berat'] / 1000 ?>Kg)/<?= $sat ?></p>
                             <div class=""><br />
-                                <a href="<?= site_url('user/produk/detail?kodeproduk='.$value['kodeproduk']) ?>"
+                                <a href="<?= site_url('user/check?kodeproduk='.$value['kodeproduk']) ?>"
                                     class="btn btn-danger" data-gall="portfolioGallery" class="venobox"
                                     title="Pesan">Pesan Sekarang...</a>
                             </div>

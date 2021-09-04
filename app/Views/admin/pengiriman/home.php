@@ -38,12 +38,12 @@
                                         <th>No</th>
                                         <th>ID Transaksi</th>
                                         <th>Nama Pemesan</th>
+                                        <th>IDGroup</th>
                                         <th>Produk</th>
                                         <th>Jumlah</th>
                                         <th>Berat</th>
                                         <th>Tujuan Pengiriman</th>
                                         <th>Ongkos Kirim</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,13 +51,18 @@
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td><?= $value['idtransaksi'] ?></td>
+                                        <?php if($value['idgroup'] == 0) : ?>
+                                        <td colspan="2">
+                                            <?php else : ?>
                                         <td>
+                                            <?php endif; ?>
                                             <?php foreach ($user as $keyU => $valueU) {
                                                     if ($value['iduser'] == $valueU['iduser']) {
                                                         echo $valueU['namauser'];
                                                     }
                                                 } ?>
                                         </td>
+                                        <td><?= $value['idgroup'] ?></td>
                                         <td>
                                             <?php foreach ($produk as $keyP => $valueP) {
                                                     if ($value['kodeproduk'] == $valueP['kodeproduk']) {
@@ -69,7 +74,7 @@
                                         <td>
                                             <?php foreach ($produk as $keyP => $valueP) {
                                                     if ($value['kodeproduk'] == $valueP['kodeproduk']) {
-                                                        echo $valueP['berat'] * $value['jumlah'] . " Kg";
+                                                        echo $valueP['berat'] * $value['jumlah'] . " gram";
                                                     }
                                                 } ?>
                                         </td>
@@ -81,10 +86,6 @@
                                                 } ?>
                                         </td>
                                         <td>Rp. <?= number_format($value['ongkir']) ?></td>
-                                        <td>
-                                            <a href="<?= site_url('admin/pengiriman/pesan?idtransaksi=' . $value['idtransaksi']) ?>"
-                                                class="btn-md"><i class="fa fa-whatsapp"></i></a>
-                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>

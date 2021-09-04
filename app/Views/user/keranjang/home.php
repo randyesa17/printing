@@ -71,7 +71,7 @@
                                 </thead>
                                 <tbody>
                                     <form action="<?= site_url('user/keranjang/update') ?>" method="get" id="checkouts">
-                                        <?php $no = 1;
+                                        <?php $banyak = 0;$no = 1;
                                         foreach ($keranjang as $key => $value) : ?>
 
                                         <input type="hidden" name="idkeranjang<?= $no ?>"
@@ -165,6 +165,7 @@
                                         <?php $banyak = $no;
                                             $no++;
                                         endforeach; ?>
+                                        <input type="hidden" name="banyakkeranjang" value="<?= $no ?>">
                                         <input type="hidden" name="banyak" value="<?= $banyak ?>">
                                     </form>
                                 </tbody>

@@ -44,9 +44,9 @@
                                     value="<?= $produk['harga'] ?>" required>
                             </div>
                             <div class="form-group">
-                                <label for="berat">Berat Produk(Kg) per Satuan</label>
+                                <label for="berat">Berat Produk(gram) per Satuan</label>
                                 <input type="number" name="berat" class="form-control" id="berat"
-                                    value="<?= $produk['berat'] ?>" step="0.01" required>
+                                    value="<?= $produk['berat'] ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>

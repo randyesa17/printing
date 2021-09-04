@@ -42,9 +42,9 @@
                                     min="1" required>
                             </div>
                             <div class="form-group">
-                                <label for="berat">Berat Produk(Kg) per Satuan</label>
+                                <label for="berat">Berat Produk(gram) per Satuan</label>
                                 <input type="number" name="berat" class="form-control" id="berat"
-                                    placeholder="Berat (Kg)" step="0.01" required>
+                                    placeholder="Berat (gram)" required>
                             </div>
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
