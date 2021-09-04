@@ -57,7 +57,7 @@
                                     required>
                             </div><br>
                             <div class="md-form">
-                                <label for="desain1">Desain Produk : </label>
+                                <label for="desain1">Jenis Produk : </label>
                                 <input type="file" name="desain1" class="form-control-file" id="desain1"
                                     accept="image/*" required>
                             </div><br>

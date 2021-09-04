@@ -34,7 +34,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
-                                <textarea name="alamat" id="alamat" cols="10" rows="5" placeholder="Alamat"
+                                <textarea name="alamat" id="alamat" class="form-control" placeholder="Alamat"
                                     required><?= $karyawan['alamat'] ?></textarea>
                             </div>
                             <div class="form-group">

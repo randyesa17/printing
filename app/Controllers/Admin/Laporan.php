@@ -17,7 +17,7 @@ class Laporan extends BaseController
 		$modelProduk = new ProdukModel();
 
         $db = \Config\Database::connect();
-		$sql = "SELECT * FROM transaksi WHERE status != 'Belum Dibayar' AND status != 'Menunggu Verifikasi'";
+		$sql = "SELECT * FROM transaksi WHERE status != 'Belum Bayar' AND status != 'Menunggu Verifikasi'";
 		$result = $db->query($sql);
 		$transaksi = $result->getResult('array');
         // $hitung = $result->getNumRows();
@@ -28,7 +28,7 @@ class Laporan extends BaseController
             $jumlahProduk = 0;
             $total = 0;
             $terjual = 0;   
-            $sql = "SELECT * FROM transaksi WHERE kodeproduk='$kodeproduk' AND status != 'Belum Dibayar' AND status != 'Menunggu Verifikasi'";
+            $sql = "SELECT * FROM transaksi WHERE kodeproduk='$kodeproduk' AND status != 'Belum Bayar' AND status != 'Menunggu Verifikasi'";
             $result = $db->query($sql);
             $pesanan = $result->getResult('array');
             foreach ($pesanan as $keyP => $valueP) {
@@ -67,7 +67,7 @@ class Laporan extends BaseController
 		$modelProduk = new ProdukModel();
 
 		$db = \Config\Database::connect();
-		$sql = "SELECT * FROM transaksi WHERE status != 'Belum Dibayar' AND status != 'Menunggu Verifikasi'";
+		$sql = "SELECT * FROM transaksi WHERE status != 'Belum Bayar' AND status != 'Menunggu Verifikasi'";
 		$result = $db->query($sql);
 		$transaksi = $result->getResult('array');
 		$user = $modelUser->findAll();
@@ -77,7 +77,7 @@ class Laporan extends BaseController
             $jumlahProduk = 0;
             $total = 0;
             $terjual = 0;   
-            $sql = "SELECT * FROM transaksi WHERE kodeproduk='$kodeproduk' AND status != 'Belum Dibayar' AND status != 'Menunggu Verifikasi'";
+            $sql = "SELECT * FROM transaksi WHERE kodeproduk='$kodeproduk' AND status != 'Belum Bayar' AND status != 'Menunggu Verifikasi'";
             $result = $db->query($sql);
             $pesanan = $result->getResult('array');
             foreach ($pesanan as $keyP => $valueP) {
@@ -115,7 +115,7 @@ class Laporan extends BaseController
         $sampai = $this->request->getPost('sampai');
 
         $db = \Config\Database::connect();
-        $sql = "SELECT * FROM transaksi WHERE tgl BETWEEN '$awal' AND '$sampai' AND status != 'Belum Dibayar' AND status != 'Menunggu Verifikasi'";
+        $sql = "SELECT * FROM transaksi WHERE tgl BETWEEN '$awal' AND '$sampai' AND status != 'Belum Bayar' AND status != 'Menunggu Verifikasi'";
         $result = $db->query($sql);
         $transaksi = $result->getResult('array');
         // $hitung = $result->getNumRows();
@@ -126,7 +126,7 @@ class Laporan extends BaseController
             $jumlahProduk = 0;
             $total = 0;
             $terjual = 0;   
-            $sql = "SELECT * FROM transaksi WHERE tgl BETWEEN '$awal' AND '$sampai' AND kodeproduk='$kodeproduk' AND status != 'Belum Dibayar' AND status != 'Menunggu Verifikasi'";
+            $sql = "SELECT * FROM transaksi WHERE tgl BETWEEN '$awal' AND '$sampai' AND kodeproduk='$kodeproduk' AND status != 'Belum Bayar' AND status != 'Menunggu Verifikasi'";
             $result = $db->query($sql);
             $pesanan = $result->getResult('array');
             foreach ($pesanan as $keyP => $valueP) {

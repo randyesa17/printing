@@ -76,13 +76,13 @@
                             enctype="multipart/form-data">
                             <input type="hidden" name="kodeproduk" value="<?= $produk['kodeproduk'] ?>">
                             <div class="md-form mb-3">
-                                <h4>Desain</h4>
+                                <h4>Jenis</h4>
                                 <div>
                                     <select name="desain" id="desain" class="form-control">
-                                        <option value="1">Pilih Desain</option>
-                                        <option value="desain1">Desain 1</option>
-                                        <option value="desain2">Desain 2</option>
-                                        <option value="desain3">Desain 3</option>
+                                        <option value="1">Pilih Jenis</option>
+                                        <option value="desain1">Jenis 1</option>
+                                        <option value="desain2">Jenis 2</option>
+                                        <option value="desain3">Jenis 3</option>
                                         <option value="custom">Upload Sendiri</option>
                                     </select>
                                 </div>
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                             <div class="md-form">
-                                <label for="desain" class="">Upload Desain : </label>
+                                <label for="desain" class="">Upload Desain Jenis : </label>
                                 <input type="file" name="desain" id="custom" class="form-control-file" accept="image/*"
                                     disabled>
                             </div>

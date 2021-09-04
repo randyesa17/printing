@@ -81,6 +81,7 @@
                                         <th>Alamat</th>
                                         <th>No Telp</th>
                                         <th>Produk</th>
+                                        <th>Harga Satuan</th>
                                         <th>Desain</th>
                                         <th>Jumlah</th>
                                         <th>Total Harga</th>
@@ -116,6 +117,13 @@
                                             <?php foreach ($produk as $keyP => $valueP) {
                                             if ($value['kodeproduk'] == $valueP['kodeproduk']) {
                                                 echo $valueP['namaproduk'];
+                                            }
+                                        } ?>
+                                        </td>
+                                        <td>
+                                            <?php foreach ($produk as $keyP => $valueP) {
+                                            if ($value['kodeproduk'] == $valueP['kodeproduk']) {
+                                                echo "Rp. ".number_format($valueP['harga']);
                                             }
                                         } ?>
                                         </td>

@@ -36,6 +36,7 @@
                         <tr>
                             <th scope="col">Tanggal</th>
                             <th scope="col">Produk</th>
+                            <th scope="col">Harga Satuan</th>
                             <th scope="col">Jumlah</th>
                             <th scope="col">Harga</th>
                             <th scope="col">IdGroup</th>
@@ -61,6 +62,18 @@
                                     </a>
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm"><?= $valueP['namaproduk'] ?></span>
+                                    </div>
+                                </div>
+                                <?php endif; ?>
+                                <?php endforeach; ?>
+                            </td>
+                            <td>
+                                <?php foreach ($produk as $keyP => $valueP) : ?>
+                                <?php if ($value['kodeproduk'] == $valueP['kodeproduk']) : ?>
+                                <div class="media align-items-center">
+                                    <div class="media-body">
+                                        <span class="name mb-0 text-sm">Rp.
+                                            <?= number_format($valueP['harga']) ?></span>
                                     </div>
                                 </div>
                                 <?php endif; ?>
@@ -106,6 +119,18 @@
                                     </a>
                                     <div class="media-body">
                                         <span class="name mb-0 text-sm"><?= $valueP['namaproduk'] ?></span>
+                                    </div>
+                                </div>
+                                <?php endif; ?>
+                                <?php endforeach; ?>
+                            </td>
+                            <td>
+                                <?php foreach ($produk as $keyP => $valueP) : ?>
+                                <?php if ($value['kodeproduk'] == $valueP['kodeproduk']) : ?>
+                                <div class="media align-items-center">
+                                    <div class="media-body">
+                                        <span class="name mb-0 text-sm">Rp.
+                                            <?= number_format($valueP['harga']) ?></span>
                                     </div>
                                 </div>
                                 <?php endif; ?>

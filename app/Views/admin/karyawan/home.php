@@ -65,7 +65,7 @@
                                             </a>
                                             <a onclick="return confirm('Apa anda yakin?')"
                                                 href="<?= site_url('admin/karyawan/hapus?kode='.$value['kodekaryawan']) ?>"
-                                                class="btn btn-xs btn-danger">
+                                                class="btn-sm btn-danger">
                                                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                             </a>
                                         </div>

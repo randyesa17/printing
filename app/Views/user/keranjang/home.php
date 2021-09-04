@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="<?= site_url('assets/publik/css/slicknav.min.css') ?>">
 
 <!-- Eshop StyleSheet -->
-<link rel="stylesheet" href="<?= site_url('assets/publik/css/reset.css') ?>">
+<!-- <link rel="stylesheet" href="<?= site_url('assets/publik/css/reset.css') ?>"> -->
 <link rel="stylesheet" href="<?= site_url('assets/publik/css/styless.css') ?>">
 <link rel="stylesheet" href="<?= site_url('assets/publik/css/responsive.css') ?>">
 <main id="main">

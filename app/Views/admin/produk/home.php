@@ -69,7 +69,7 @@
                                     <td class="text-center">
                                         <div class="hidden-sm hidden-xs btn-group">
                                             <a href="<?= site_url('admin/produk/desain?kodeproduk=' . $value['kodeproduk']) ?>"
-                                                class="btn-sm btn-primary">Lihat Desain</a>
+                                                class="btn-sm btn-primary">Lihat Jenis</a>
                                             <a href="<?= site_url('admin/produk/ubah?kodeproduk=' . $value['kodeproduk']) ?>"
                                                 class="btn-sm btn-info">
                                                 <i class="ace-icon fa fa-edit bigger-120"></i>

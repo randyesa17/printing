@@ -91,7 +91,7 @@
                     <?php else : ?>
                     Tidak Ada<br /><br />
                     <?php endif; ?>
-                    <label class=""><strong>Desain Yang Diinginkan</strong></label><br /><br />
+                    <label class=""><strong>Jenis Yang Diinginkan</strong></label><br /><br />
                     <div class="col-md-5 col-lg-6 order-md-0 text-center text-md-start">
                         <img class="img-fluid" src="<?= site_url('assets/images/desain/'.$value['desain']) ?>"
                             width="550" alt="" /><br /><br />

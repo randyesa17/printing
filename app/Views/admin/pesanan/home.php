@@ -40,6 +40,7 @@
                                         <th>Nama Pemesan</th>
                                         <th>IDGroup</th>
                                         <th>Produk</th>
+                                        <th>Harga Satuan</th>
                                         <th>Desain</th>
                                         <th>Keterangan Pesan</th>
                                         <th>Tambahan</th>
@@ -67,6 +68,13 @@
                                             <?php foreach ($produk as $keyP => $valueP) {
                                             if ($value['kodeproduk'] == $valueP['kodeproduk']) {
                                                 echo $valueP['namaproduk'];
+                                            }
+                                        } ?>
+                                        </td>
+                                        <td>
+                                            <?php foreach ($produk as $keyP => $valueP) {
+                                            if ($value['kodeproduk'] == $valueP['kodeproduk']) {
+                                                echo "Rp. ".number_format($valueP['harga']);
                                             }
                                         } ?>
                                         </td>
@@ -124,6 +132,13 @@
                                             <?php foreach ($produk as $keyP => $valueP) {
                                             if ($value['kodeproduk'] == $valueP['kodeproduk']) {
                                                 echo $valueP['namaproduk'];
+                                            }
+                                        } ?>
+                                        </td>
+                                        <td>
+                                            <?php foreach ($produk as $keyP => $valueP) {
+                                            if ($value['kodeproduk'] == $valueP['kodeproduk']) {
+                                                echo "Rp. ".number_format($valueP['harga']);
                                             }
                                         } ?>
                                         </td>
