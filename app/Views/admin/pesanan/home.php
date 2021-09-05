@@ -82,11 +82,19 @@
                                                 href="<?= site_url('assets/images/desain/'.$value['desain']) ?>"
                                                 download>Download Desain</a>
                                         </td>
+                                        <?php if(!empty($value['ket'])) : ?>
                                         <td><?= $value['ket'] ?></td>
+                                        <?php else : ?>
+                                        <td>Tidak Ada Keterangan</td>
+                                        <?php endif; ?>
+                                        <?php if(!empty($value['ket'])) : ?>
                                         <td class="image" data-title="No"><a
                                                 href="<?= site_url('assets/images/tambahan/'.$value['tambahan']) ?>"
                                                 download>Download Tambahan</a>
                                         </td>
+                                        <?php else : ?>
+                                        <td>Tidak Ada Tambahan</td>
+                                        <?php endif; ?>
                                         <td><?= $value['jumlah'] ?></td>
                                         <td>Rp. <?= number_format($value['totalbiaya']) ?></td>
                                         <td class="image" data-title="No">

@@ -108,6 +108,7 @@ class Pesanan extends BaseController
                     'desain' => $keranjang['desain'],
                     'ket' => $keranjang['keterangan'],
                     'tambahan' => $keranjang['tambahan'],
+                    'kodepos' => $this->request->getPost('kodepos'),
                     'status' => 'Belum Bayar',
                 ];
     
@@ -270,16 +271,19 @@ class Pesanan extends BaseController
         $modelProduk = new ProdukModel();
         $modelUser = new UserModel();
         $modelDaerah = new DaerahModel();
+        $modelSatuan = new SatuanModel();
 
         $pesanan = $model->where('idtransaksi', $this->request->getGet('idtransaksi'))->first();
         $produk = $modelProduk->where('kodeproduk', $pesanan['kodeproduk'])->first();
         $user = $modelUser->where('iduser', $pesanan['iduser'])->first();
         $daerah = $modelDaerah->findAll();
+        $satuan = $modelSatuan->findAll();
         $data = [
             'pesanan' => $pesanan,
             'produk' => $produk,
             'user' => $user,
             'daerah' => $daerah,
+            'satuan' => $satuan,
         ];
         return view('user/pesanan/detail', $data);
     }
@@ -353,7 +357,7 @@ class Pesanan extends BaseController
         Ongkir : ".number_format($pesanan['ongkir'])."\n
         Total Biaya: ".number_format($pesanan['totalbiaya'])."\n
         Silahkan Transfer ke Bank Syariah Mandiri\n
-        No Rekening : 7112893201. A.n Emily";
+        No Rekening : 7112893201. A.n Emmily";
         $curl = curl_init();
 		$token = "4lvKziwp4kXO7m4ZKEDA8qDF8kdE5Dj8M9h8WrinehW8QiDJ0THRFryXoWYcpaRs";
 		$data = [
@@ -415,7 +419,7 @@ class Pesanan extends BaseController
         Ongkir : ".number_format($ongkir)."\n
         Total Biaya: ".number_format($biaya)."\n
         Silahkan Transfer ke Bank Syariah Mandiri\n
-        No Rekening : 7112893201. A.n Emily";
+        No Rekening : 7112893201. A.n Emmily";
         $curl = curl_init();
 		$token = "4lvKziwp4kXO7m4ZKEDA8qDF8kdE5Dj8M9h8WrinehW8QiDJ0THRFryXoWYcpaRs";
 		$data = [

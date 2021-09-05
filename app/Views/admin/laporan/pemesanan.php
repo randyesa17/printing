@@ -77,6 +77,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th width="100">Tanggal</th>
+                                        <th>IdGroup</th>
                                         <th>Nama Pemesan</th>
                                         <th>Alamat</th>
                                         <th>No Telp</th>
@@ -91,7 +92,16 @@
                                     <?php foreach($transaksi as $key => $value) : ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= date('d/m/Y', strtotime($value['tgl'])) ?></td>
+                                        <?php if($value['idgroup'] == 0) : ?>
+                                        <td colspan="2">
+                                            <?php else : ?>
+                                        <td>
+                                            <?php endif; ?>
+                                            <?= date('d/m/Y', strtotime($value['tgl'])) ?>
+                                        </td>
+                                        <?php if($value['idgroup'] != 0) : ?>
+                                        <td><?= $value['idgroup'] ?></td>
+                                        <?php endif; ?>
                                         <td>
                                             <?php foreach ($user as $keyU => $valueU) {
                                             if ($value['iduser'] == $valueU['iduser']) {
@@ -127,21 +137,16 @@
                                             }
                                         } ?>
                                         </td>
-                                        <td class="image" data-title="No"><a
-                                                href="<?= site_url('assets/images/desain/'.$value['desain']) ?>"
-                                                download>Download Desain</a>
+                                        <td class="image" data-title="No">
+                                            <img src="<?= site_url('assets/images/desain/'.$value['desain']) ?>"
+                                                width="50px" alt="">
                                         </td>
                                         <td><?= $value['jumlah'] ?></td>
-                                        <td><?php foreach ($produk as $keyP => $valueP) {
-                                            if ($value['kodeproduk'] == $valueP['kodeproduk']) {
-                                                echo "Rp. ".number_format($valueP['total']);
-                                            }
-                                        } ?>
-                                        </td>
+                                        <td>Rp. <?= number_format($value['totalharga']) ?></td>
                                     </tr>
                                     <?php endforeach; ?>
                                     <tr>
-                                        <td colspan="8">Total Uang yang Masuk</td>
+                                        <td colspan="10">Total Uang yang Masuk</td>
                                         <td class="text-right">Rp. <?= number_format($total) ?></td>
                                     </tr>
                                 </tbody>

@@ -77,6 +77,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Produk</th>
+                                        <th>Harga Satuan</th>
                                         <th>Terjual</th>
                                         <th>Uang Masuk</th>
                                     </tr>
@@ -86,12 +87,13 @@
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td><?= $value['namaproduk'] ?></td>
+                                        <td>Rp. <?= number_format($value['harga']) ?></td>
                                         <td><?= number_format($value['terjual']) ?></td>
                                         <td>Rp. <?= number_format($value['total']) ?></td>
                                     </tr>
                                     <?php endforeach; ?>
                                     <tr>
-                                        <td colspan="3">Total Uang yang Masuk</td>
+                                        <td colspan="4">Total Uang yang Masuk</td>
                                         <td class="text-right">Rp. <?= number_format($total) ?></td>
                                     </tr>
                                 </tbody>

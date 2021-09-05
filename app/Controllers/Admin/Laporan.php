@@ -32,7 +32,7 @@ class Laporan extends BaseController
             $result = $db->query($sql);
             $pesanan = $result->getResult('array');
             foreach ($pesanan as $keyP => $valueP) {
-                $total = $total + $valueP['totalharga'] + $valueP['ongkir'];
+                $total = $total + $valueP['totalharga'] ;
                 $terjual = $terjual + $valueP['jumlah'];
                 $jumlahProduk++;
             }
@@ -42,7 +42,7 @@ class Laporan extends BaseController
         }
         $total = 0;
         foreach ($transaksi as $key => $value) {
-            $total = $total + $value['totalharga'] + $value['ongkir'];
+            $total = $total + $value['totalharga'] ;
         }
         // echo "<pre>";
         // print_r($produk);
@@ -81,7 +81,7 @@ class Laporan extends BaseController
             $result = $db->query($sql);
             $pesanan = $result->getResult('array');
             foreach ($pesanan as $keyP => $valueP) {
-                $total = $total + $valueP['totalharga'] + $valueP['ongkir'];
+                $total = $total + $valueP['totalharga'];
                 $terjual = $terjual + $valueP['jumlah'];
                 $jumlahProduk++;
             }
@@ -91,7 +91,7 @@ class Laporan extends BaseController
         }
         $total = 0;
         foreach ($transaksi as $key => $value) {
-            $total = $total + $value['totalharga'] + $value['ongkir'];
+            $total = $total + $value['totalharga'];
         }
 		$data = [
 			'judul' => 'Laporan Transaksi Pemesanan',
@@ -130,7 +130,7 @@ class Laporan extends BaseController
             $result = $db->query($sql);
             $pesanan = $result->getResult('array');
             foreach ($pesanan as $keyP => $valueP) {
-                $total = $total + $valueP['totalharga'] + $valueP['ongkir'];
+                $total = $total + $valueP['totalharga'] ;
                 $terjual = $terjual + $valueP['jumlah'];
                 $jumlahProduk++;
             }
@@ -140,7 +140,7 @@ class Laporan extends BaseController
         }
         $total = 0;
         foreach ($transaksi as $key => $value) {
-            $total = $total + $value['totalharga'] + $value['ongkir'];
+            $total = $total + $value['totalharga'] ;
         }
         // echo "<pre>";
         // print_r($produk);

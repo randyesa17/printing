@@ -40,6 +40,7 @@
                                         <th>Nama Pemesan</th>
                                         <th>IDGroup</th>
                                         <th>Produk</th>
+                                        <th>Harga Satuan</th>
                                         <th>Jumlah</th>
                                         <th>Berat</th>
                                         <th>Tujuan Pengiriman</th>
@@ -62,7 +63,9 @@
                                                     }
                                                 } ?>
                                         </td>
+                                        <?php if($value['idgroup'] != 0) : ?>
                                         <td><?= $value['idgroup'] ?></td>
+                                        <?php endif; ?>
                                         <td>
                                             <?php foreach ($produk as $keyP => $valueP) {
                                                     if ($value['kodeproduk'] == $valueP['kodeproduk']) {
@@ -70,11 +73,18 @@
                                                     }
                                                 } ?>
                                         </td>
+                                        <td>
+                                            <?php foreach ($produk as $keyP => $valueP) {
+                                                    if ($value['kodeproduk'] == $valueP['kodeproduk']) {
+                                                        echo "Rp. ".number_format($valueP['harga']);
+                                                    }
+                                                } ?>
+                                        </td>
                                         <td><?= $value['jumlah'] ?></td>
                                         <td>
                                             <?php foreach ($produk as $keyP => $valueP) {
                                                     if ($value['kodeproduk'] == $valueP['kodeproduk']) {
-                                                        echo $valueP['berat'] * $value['jumlah'] . " gram";
+                                                        echo ($valueP['berat'] * $value['jumlah'])/1000 . " Kg";
                                                     }
                                                 } ?>
                                         </td>
